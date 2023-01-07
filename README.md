@@ -33,7 +33,7 @@ Permissions:
 - bansystem.unban (/unban) (``add_ace group.admin bansystem.unban allow``)
 - bansystem.reloadBans (/reloadBans) (``add_ace group.admin bansystem.reloadBans allow``)
 
-# *I will add soon:**
+# **I will add soon:**
 - Kick System
 - Warn System
 - Report System
