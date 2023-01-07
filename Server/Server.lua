@@ -282,7 +282,7 @@ function banPlayer(bannedBy, source, reason, time, bannedOn)
             }
             saveJsonConfig("SavedBans", PlayerBans)
         end
-        Citizen.Wait(550)
+        Citizen.Wait(1550)
         DropPlayer(source, "[Ban-System] You have been banned! | Try rejoining for more information.")
     else
         sendChatMessage(bannedBy, "Invalid player source! Please use: /ban <player> <reason> <time>")
