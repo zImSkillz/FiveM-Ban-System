@@ -2,19 +2,8 @@
 BanScreensBase64Saved = {}
 PlayerBans = {}
 MySQLBanList = {}
+Version = "1.0.0"
 -- Locals
-
-
--- Json Helper
-function loadJsonConfig(config)
-	local loadedContent = LoadResourceFile(GetCurrentResourceName(), "Cache/" .. config .. ".json")
-	return loadedContent and json.decode(loadedContent) or nil
-end
-
-function saveJsonConfig(config, content)
-    SaveResourceFile(GetCurrentResourceName(), "Cache/" .. config .. ".json", json.encode(content), -1)
-end
--- Json Helper
 
 
 -- Chat Message Helper
@@ -28,6 +17,36 @@ function sendChatMessage(sendTo, message)
     end
 end
 -- Chat Message Helper
+
+
+-- Version Checker
+AddEventHandler('onResourceStart', function(resourceName)
+    if (GetCurrentResourceName() ~= resourceName) then
+        return
+    end
+
+    PerformHttpRequest("https://raw.githubusercontent.com/zImSkillz/FiveM-Ban-System/main/version", function(err, rText, headers)
+        if rText == Version then
+            sendChatMessage(0, "^2You are using the latest version, have fun!")
+        else
+            sendChatMessage(0, "^1You are not using the latest version, please update! ^3https://github.com/zImSkillz/FiveM-Ban-System")
+        end
+    end)
+
+end)
+-- Version Checker
+
+
+-- Json Helper
+function loadJsonConfig(config)
+	local loadedContent = LoadResourceFile(GetCurrentResourceName(), "Cache/" .. config .. ".json")
+	return loadedContent and json.decode(loadedContent) or nil
+end
+
+function saveJsonConfig(config, content)
+    SaveResourceFile(GetCurrentResourceName(), "Cache/" .. config .. ".json", json.encode(content), -1)
+end
+-- Json Helper
 
 
 -- Ban Time Helper
@@ -282,7 +301,7 @@ function banPlayer(bannedBy, source, reason, time, bannedOn)
             }
             saveJsonConfig("SavedBans", PlayerBans)
         end
-        Citizen.Wait(1550)
+        Citizen.Wait(550)
         DropPlayer(source, "[Ban-System] You have been banned! | Try rejoining for more information.")
     else
         sendChatMessage(bannedBy, "Invalid player source! Please use: /ban <player> <reason> <time>")
