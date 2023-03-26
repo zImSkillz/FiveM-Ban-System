@@ -1,4 +1,4 @@
-# FiveM-AntiLagSwitch
+# FiveM-Ban-System
 
 # **DEUTSCH**
 Benötigt dein FiveM Server ein Ban System mit geilen Funktionen? dann ist das ban system das richtige für dich!
